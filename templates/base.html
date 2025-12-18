@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yahwin | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-brand" data-aos="fade-right">Yahwin Lukose<span>.</span></div>
+            
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}#home">Home</a></li>
+                <li><a href="{{ url_for('home') }}#about">About</a></li>
+                <li><a href="{{ url_for('home') }}#skills">Skills</a></li>
+                <li><a href="{{ url_for('projects_page') }}">Code Lab</a></li>
+                <li><a href="{{ url_for('home') }}#contact">Contact</a></li>
+                <li><a class="resume-btn" href="#" target="_blank">Resume <i class="fas fa-download"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" data-aos="fade-left">
+                {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Yahwin Lukose • Built with <i class="fab fa-python"></i> Flask</p>
+            <div class="footer-socials">
+                <a href="https://github.com/yahwinlukose" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yahwin-lukose-3a95732a4" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Simple script to auto-hide flash messages after 5 seconds
+        setTimeout(function() {
+            const flash = document.querySelector('.flash-container');
+            if(flash) flash.style.display = 'none';
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,87 +1,238 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Yahwin | Portfolio</title>
+{% extends "base.html" %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-
-    <!-- ===== NAVBAR ===== -->
-    <nav>
-        <div class="nav-brand">Yahwin</div>
-
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li>
-                <a class="resume-btn" href="#" title="Add resume later">
-                    Resume
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- ===== HERO ===== -->
-    <header>
+<header class="hero" id="home">
+    <div class="hero-content" data-aos="fade-up">
+        <div class="hero-badge">
+            <span class="pulse"></span> Postgraduate Scholar
+        </div>
         <h1>Yahwin</h1>
-        <p>Python • Flask • Django • C • Java</p>
-    </header>
+        
+        <div class="code-typing">
+            <span class="prompt">></span>
+            <span id="typed-text"></span>
+            <span class="cursor">|</span>
+        </div>
 
-    <!-- ===== ABOUT ===== -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            I am a Computer Science postgraduate student with hands-on experience in
-            Python, Flask, Django, C, and Java. I build real-world projects to strengthen
-            my backend development skills and core programming fundamentals.
-        </p>
-    </section>
+        <div class="hero-ctas">
+            <a href="#code-lab" class="cta-btn primary">Explore Code Lab</a>
+            <a href="#contact" class="cta-btn secondary">Let's Talk</a>
+        </div>
+    </div>
+</header>
 
-    <!-- ===== PROJECTS ===== -->
-    <section id="projects">
-        <h2>Projects</h2>
+<section id="about">
+    <div class="container">
+        <div class="section-header" data-aos="fade-right">
+            <span class="sub-title">Introduction</span>
+            <h2>About Me</h2>
+        </div>
+
+        <div class="about-wrapper">
+            <div class="about-text" data-aos="fade-up">
+                <p>
+                    I am a <strong>Computer Science Postgraduate</strong> student who thrives on solving complex backend challenges. My journey into programming started with a fascination for how data flows through systems, leading me to master <strong>Python, Flask, and Django</strong>.
+                </p>
+                <p>
+                    Beyond high-level web frameworks, I enjoy diving into the "engine room" of computing using <strong>C and Java</strong>. This dual interest allows me to build modern web apps while maintaining a deep understanding of memory management and data structures.
+                </p>
+                
+                <div class="about-highlights">
+                    <div class="highlight" data-aos="zoom-in" data-aos-delay="100">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <div class="h-info">
+                            <strong>Education</strong>
+                            <span>CS Postgraduate</span>
+                        </div>
+                    </div>
+                    <div class="highlight" data-aos="zoom-in" data-aos-delay="200">
+                        <i class="fas fa-terminal" aria-hidden="true"></i>
+                        <div class="h-info">
+                            <strong>Focus</strong>
+                            <span>Backend Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-info-card" data-aos="fade-left">
+                <h3>Quick Info</h3>
+                <ul class="info-list">
+                    <li><span class="label">Location</span><span class="value">India</span></li>
+                    <li><span class="label">Specialization</span><span class="value">API Architecture</span></li>
+                    <li><span class="label">Current Goal</span><span class="value">Scalable System Design</span></li>
+                    <li><span class="label">Learning</span><span class="value">System Architecture</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="sub-title">Expertise</span>
+            <h2>Skills & Tech Stack</h2>
+        </div>
+        
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fab fa-python python-icon" aria-hidden="true"></i>
+                <h3>Python</h3>
+                <p>Advanced Logic & Scripting</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-leaf flask-icon" aria-hidden="true"></i>
+                <h3>Flask</h3>
+                <p>REST APIs & Web Apps</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fab fa-uncharted django-icon" aria-hidden="true"></i>
+                <h3>Django</h3>
+                <p>Full-stack Architecture</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
+                <i class="fas fa-microchip c-icon" aria-hidden="true"></i>
+                <h3>C / DS</h3>
+                <p>Memory & Algorithms</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="500">
+                <i class="fab fa-java java-icon" aria-hidden="true"></i>
+                <h3>Java</h3>
+                <p>OOP Fundamentals</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="code-lab">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="sub-title">Repositories</span>
+            <h2>Technical Work & Code Lab</h2>
+            <p>A collection of applications, algorithmic practice, and technical experiments.</p>
+        </div>
 
         <div class="projects-grid">
             {% for project in projects %}
-            <div class="project-card">
-                <h3>{{ project.name }}</h3>
-                <p>{{ project.description }}</p>
-                <p class="tech"><b>Tech:</b> {{ project.tech }}</p>
-                <a href="{{ project.link }}" target="_blank">View on GitHub</a>
+            <div class="project-card" data-aos="fade-up">
+                <div class="project-content">
+                    <div class="repo-badge"><i class="fas fa-code-branch"></i> Public Repo</div>
+                    <h3>{{ project.name }}</h3>
+                    <p>{{ project.description }}</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">{{ project.tech }}</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="{{ project.link }}" class="github-btn" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i> View Source Code
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>
-    </section>
+        
+        <div class="view-more-container" data-aos="zoom-in">
+            <a href="{{ url_for('projects_page') }}" class="view-more-link">Explore Full Code Lab →</a>
+        </div>
+    </div>
+</section>
 
-    <!-- ===== CONTACT ===== -->
-    <section id="contact" class="contact">
-        <h2>Contact</h2>
+<section id="contact">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="sub-title">Connect</span>
+            <h2>Let's Build Something Great</h2>
+        </div>
 
-        <p>
-            GitHub:
-            <a href="https://github.com/yahwinlukose" target="_blank">
-                github.com/yahwinlukose
-            </a>
-        </p>
+        <div class="contact-wrapper">
+            <form action="/" method="POST" class="contact-form" data-aos="fade-right">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-btn primary">Send Message <i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+            </form>
 
-        <p>
-            Email:
-            <a href="mailto:yahwinlukose0@gmail.com">
-                yahwinlukose0@gmail.com
-            </a>
-        </p>
-    </section>
+            <div class="contact-info" data-aos="fade-left">
+                <div class="info-card">
+                    <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+                    <div class="info-details">
+                        <span>Email Me</span>
+                        <a href="mailto:yahwinlukose@gmail.com">yahwinlukose@gmail.com</a>
+                    </div>
+                </div>
 
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        © 2025 Yahwin • Built with Flask
-    </footer>
+                <div class="info-card">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <div class="info-details">
+                        <span>GitHub</span>
+                        <a href="https://github.com/yahwinlukose" target="_blank" rel="noopener noreferrer">github.com/yahwinlukose</a>
+                    </div>
+                </div>
 
-</body>
-</html>
+                <div class="info-card">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    <div class="info-details">
+                        <span>LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/yahwin-lukose-3a95732a4" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const textElement = document.getElementById("typed-text");
+    const roles = [
+        "python --version 3.12",
+        "flask run --host=0.0.0.0",
+        "django-admin startproject",
+        "gcc main.c -o output",
+        "java MyStackImplementation"
+    ];
+
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 100;
+
+    function type() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            textElement.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+            typeSpeed = 50;
+        } else {
+            textElement.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+            typeSpeed = 150;
+        }
+
+        if (!isDeleting && charIndex === currentRole.length) {
+            isDeleting = true;
+            typeSpeed = 2000; 
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            typeSpeed = 500;
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    type();
+});
+</script>
+
+{% endblock %}
