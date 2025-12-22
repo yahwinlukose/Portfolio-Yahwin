@@ -309,9 +309,90 @@ footer { padding: 60px 10%; background: #020617; text-align: center; border-top:
 .alert { padding: 15px 30px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--accent-color); color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
 /* --- RESPONSIVE --- */
+/* =========================================================
+   RESPONSIVE FIX (DESIGN PRESERVED)
+   ========================================================= */
+
+/* ---------- TABLETS ---------- */
 @media (max-width: 992px) {
-    .about-wrapper, .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
-    .nav-links { display: none; }
-    header h1 { font-size: 3rem; }
-    section { padding: 80px 5%; }
+
+    section {
+        padding: 90px 6%;
+    }
+
+    header.hero {
+        padding: 0 6%;
+    }
+
+    header h1 {
+        font-size: 3rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .about-wrapper,
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- MOBILE PHONES ---------- */
+@media (max-width: 600px) {
+
+    section {
+        padding: 80px 5%;
+    }
+
+    header.hero {
+        height: auto;
+        padding-top: 120px;
+        padding-bottom: 80px;
+    }
+
+    header h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+    }
+
+    .code-typing {
+        font-size: 0.8rem;
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-ctas {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cta-btn {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Disable hover lift ONLY on touch */
+    .skill-card:hover,
+    .project-card:hover,
+    .info-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }
