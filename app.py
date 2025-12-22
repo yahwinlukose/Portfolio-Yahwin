@@ -1,20 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mail import Mail, Message
+from flask import Flask, render_template
 
 app = Flask(__name__)
-app.secret_key = "yahwin_secret_key"
 
-# --- EMAIL CONFIGURATION ---
-# Use your Google App Password (the 16-character code) here
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'yahwinlukose0@gmail.com' 
-app.config['MAIL_PASSWORD'] = 'lgdu yxsd fmrq jpwb'  # <--- CHANGE THIS
-
-mail = Mail(app)
-
-# Data structure remains the same
 projects_data = [
     {
         "name": "Zepto Clone (Flask)",
@@ -60,38 +47,14 @@ projects_data = [
     }
 ]
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def home():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message_content = request.form.get('message')
-        
-        # --- NEW EMAIL SENDING LOGIC ---
-        msg = Message(
-            subject=f"Portfolio Message from {name}",
-            sender=app.config['MAIL_USERNAME'],
-            recipients=[app.config['MAIL_USERNAME']], # Sends to yourself
-            body=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message_content}"
-        )
-        
-        try:
-            mail.send(msg)
-            flash("Message sent! I'll get back to you soon.", "success")
-        except Exception as e:
-            print(f"Error: {e}")
-            flash("Error sending message. Please try again.", "danger")
-            
-        return redirect(url_for('home', _anchor='contact'))
-
     featured = [p for p in projects_data if p['type'] == 'project']
     return render_template("index.html", projects=featured)
 
-@app.route('/projects')
+@app.route("/projects")
 def projects_page():
-    return render_template('projects.html', projects=projects_data)
+    return render_template("projects.html", projects=projects_data)
 
-if __name__ == "__main__":
-    app.run(debug=True)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
